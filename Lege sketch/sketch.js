@@ -6,7 +6,8 @@ let heartPotion
 
 function preload(){
   //images 
-  //cocan gray 
+  //indie pop 
+  //cocan gray  
   albumCover = loadImage('pixil-frame-conan gray.jpg')
   heartPotion = loadImage('Health potion.png')
   // next artist 
