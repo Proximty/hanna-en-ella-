@@ -1,8 +1,14 @@
-let screen1 = true//startScreen
-let screen2 = false
+let screen1 = false//startScreen
+let screen2 = true // level selector
 
-let albumCover;
-let heartPotion
+let albumCover; //variable for albumb cover conan gray
+let heartPotion; //heart potion for conan gray game
+
+let heartPotionX = 50 //x position for the heart potion
+
+
+
+
 
 function preload(){
   albumCover = loadImage('pixil-frame-conan gray.jpg')
@@ -19,7 +25,7 @@ function setup() {
 
 function draw() {
   
-
+  
   if(screen1 == true){
     background(0)
     startScreen()
@@ -32,6 +38,7 @@ function draw() {
     background(220);
   }
 
+  
   
 }
 
@@ -81,7 +88,7 @@ function levelScreen(){
   text("O", 695,420 )
   
 
-  image(heartPotion, 50, 420, 100, 100)
+  image(heartPotion, heartPotionX, 420, 100, 100)
 
   
 }
@@ -105,13 +112,13 @@ function mousePressed(){
 
 }
 //ideas
-//screen 1 begins by playing superache aka the first ssong from his albub and only when u click on the pixel art does the game start
-//game is focussed on emotions, storytelling and aesthetics that resonate with the themes of langing, love and nostalgia
-
-//collect memory fragments that represent various songs/emotions from the albumb to complete a emotional puzzle
-//control a moving carachter that moves though a dreamy landspae filled with floating abjects, each fragmewnt collected trigers a visual or audio cue related to a song + mini game inspired by the song
-//the player must avoid darker obsticles representing pain or heartbreak
-
-
 //I want to make it so that u have to play different obby's in 2d to collect new songs and that when you get the last song you get to attend a concert
 //freakyfriday
+
+function keyPressed() {
+  if(screen2 == true){
+    if (key === 'd' || key === 'D') { // Checks for 'w' or 'W'
+      console.log("D")
+    }
+  }
+}
