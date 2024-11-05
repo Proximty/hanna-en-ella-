@@ -5,8 +5,13 @@ let albumCover;
 let heartPotion
 
 function preload(){
+  //images 
+  //cocan gray 
   albumCover = loadImage('pixil-frame-conan gray.jpg')
   heartPotion = loadImage('Health potion.png')
+  // next artist 
+
+  //songs
 }
 
 
