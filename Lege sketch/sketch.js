@@ -11,6 +11,8 @@ let heartPotionY = 300
 let level1Conan = false
 
 let timer = 0
+let nextArrow = 0
+let missCounter = 0
 
 let conanGame1 = false
 
@@ -146,8 +148,13 @@ function LevelscreenCG1(){
   if(conanGame1 == true){
 
 
-     if(timer>= 5){
+     if(timer>= 5 || nextArrow >= 1 ){
+      if(nextArrow === 2){
+        missCounter ++
+      }
+      
       timer = 0
+      nextArrow = 0
       // console.log(timer)
       selectEasyArrows = round(random(3))
       console.log(selectEasyArrows)
@@ -174,11 +181,10 @@ function LevelscreenCG1(){
      rect(670, 150, 40, 200 - 40 * timer)
      }
 
-     image(arrowDown, 200, 20, 200, 200 )
-     image(arrowLeft, 0, 15, 200, 200 )
-     image(arrowUp, 400, 0, 200, 200)
-     image(arrowRight, 600, 15, 200, 200) 
-
+     image(arrowDown, 200, 20, 200, 200,)
+     image(arrowLeft, 0, 15, 200, 200,)
+     image(arrowUp, 400, 0, 200, 200,)
+     image(arrowRight, 600, 15, 200, 200,) 
 
 
 
@@ -245,5 +251,23 @@ function keyPressed() {
       level1Conan = true
     }
   }
+if (  
+  (selectEasyArrows === 2 && keyCode === UP_ARROW) ||
+  (selectEasyArrows === 1 && keyCode === DOWN_ARROW) ||
+  (selectEasyArrows === 0 && keyCode === LEFT_ARROW) ||
+  (selectEasyArrows === 3 && keyCode === RIGHT_ARROW) 
+) {  nextArrow = 1}
+   
+if (  
+  (selectEasyArrows === 2 && keyCode != UP_ARROW) ||
+  (selectEasyArrows === 1 && keyCode != DOWN_ARROW) ||
+  (selectEasyArrows === 0 && keyCode != LEFT_ARROW) ||
+  (selectEasyArrows === 3 && keyCode != RIGHT_ARROW) 
+) {  nextArrow = 2}
+ 
+
+
+
 
 }
+
