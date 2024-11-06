@@ -1,5 +1,5 @@
 let screen1 = false//startScreen
-let screen2 = true // level selector
+let screen2 = false// level selector
 
 let albumCover; //variable for albumb cover conan gray
 let heartPotion; //heart potion for conan gray game
@@ -8,6 +8,7 @@ let heartPotionX = 50 //x position for the heart potion
 let heartPotionY = 300
 
 
+let level1Conan = true
 
 
 
@@ -42,6 +43,9 @@ function draw() {
     background(0)
     levelScreen()
     
+  }
+  else if(level1Conan == true){
+    LevelscreenCG1()
   }
   else{
     background(220);
@@ -102,6 +106,12 @@ function levelScreen(){
   
 }
 function LevelscreenCG1(){
+  background(0)
+  fill(255, 70, 70, 200)
+  rect(0, 550, 800, 50)
+  
+  
+
   
 
 }
@@ -151,4 +161,12 @@ function keyPressed() {
     }
   }
   }
+  if(heartPotionX == 50){
+    
+    if (keyCode === ENTER) {
+      screen2 = false
+      level1Conan = true
+    }
+  }
+
 }
