@@ -137,8 +137,16 @@ function mousePressed(){
 
 function keyPressed() {
   if(screen2 == true){
+
+    if(heartPotionX < 601)
     if (key === 'd' || key === 'D') { // Checks for 'w' or 'W'
-      console.log("D")
+     heartPotionX +=150
     }
+
+    if(heartPotionX >50){
+    if(key === "a"|| key === "A"){
+      heartPotionX -= 150
+    }
+  }
   }
 }
