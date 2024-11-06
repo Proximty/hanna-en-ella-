@@ -100,7 +100,16 @@ function levelScreen(){
 
   
 }
-function Levelscreen1(){
+function LevelscreenCG1(){
+
+}
+function LevelscreenCG2(){
+  
+}
+function LevelscreenCG4(){
+  
+}
+function LevelscreenCG5(){
   
 }
 
