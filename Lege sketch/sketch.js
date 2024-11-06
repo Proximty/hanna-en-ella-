@@ -19,10 +19,12 @@ function preload(){
   // next artist 
 
   //songs
+  // conan gray 
+  // next arist
 }
 
 
-//aardappel en awooga
+//aardappel en 
 
 
 function setup() {
