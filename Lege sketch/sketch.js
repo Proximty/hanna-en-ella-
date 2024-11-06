@@ -100,6 +100,9 @@ function levelScreen(){
 
   
 }
+function Levelscreen1(){
+  
+}
 
 function mousePressed(){
   let x = mouseX
