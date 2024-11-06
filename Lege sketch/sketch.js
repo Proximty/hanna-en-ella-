@@ -24,7 +24,7 @@ function preload(){
 }
 
 
-//aardappel en 
+//aardappel en awooga
 
 
 function setup() {
