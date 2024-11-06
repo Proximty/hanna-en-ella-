@@ -5,6 +5,7 @@ let albumCover; //variable for albumb cover conan gray
 let heartPotion; //heart potion for conan gray game
 
 let heartPotionX = 50 //x position for the heart potion
+let heartPotionY = 300
 
 
 
@@ -96,11 +97,12 @@ function levelScreen(){
   text("O", 695,420 )
   
 
-  image(heartPotion, heartPotionX, 420, 100, 100)
+  image(heartPotion, heartPotionX, heartPotionY, 100, 100)
 
   
 }
 function LevelscreenCG1(){
+  
 
 }
 function LevelscreenCG2(){
