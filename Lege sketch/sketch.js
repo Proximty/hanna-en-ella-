@@ -12,7 +12,13 @@ let level1Conan = false
 
 let timer = 0
 let nextArrow = 0
-let missCounter = 0
+
+
+let perfect = 0
+let great = 0
+let good = 0
+let ok = 0
+let missCounter = -1  // begint op -1 zodat als je op het scherm komt van het eerste conan gray spel dat je niet al met 1 miss begint
 
 let conanGame1 = false
 
@@ -24,7 +30,7 @@ let arrowRight;
 
 let selectEasyArrows;
 
-
+let timerIncremented = false; // zorgt ervoor dat als er geen pijlen worden gedrukt binnen de 5 seconden dat misses maar 1 meer word inplaats van hoeveel je framerate is
 
 function preload(){
   //images 
@@ -51,6 +57,7 @@ function preload(){
 
 function setup() {
   createCanvas(800, 600);
+  
   
 }
 
@@ -134,8 +141,8 @@ function LevelscreenCG1(){
   fill(255, 70, 70, 200)
   rect(0, 550, 800, 50)
   image (albumCoverPixelArt,0,)  
-  //draw button
 
+  //draw button
   if(conanGame1 == false){
     textSize(40)
     fill(255, 0, 0)
@@ -146,8 +153,7 @@ function LevelscreenCG1(){
     rect(625, 450, 150, 80)
   }
   if(conanGame1 == true){
-
-
+    stroke(255)
      if(timer>= 5 || nextArrow >= 1 ){
       if(nextArrow === 2){
         missCounter ++
@@ -156,40 +162,60 @@ function LevelscreenCG1(){
       timer = 0
       nextArrow = 0
       // console.log(timer)
+      timerIncremented = false; // Reset the flag when starting a new cycle
       selectEasyArrows = round(random(3))
-      console.log(selectEasyArrows)
      }
 
      //arrow left
-     if(selectEasyArrows == 0){
-      fill(0, 0, 139, 200)
-      rect(80, 150, 40, 200 - 40 * timer)
-     }
-     if(selectEasyArrows == 1){
-      fill(0, 0, 139, 200)
-      //arrow down
-      rect(280, 150, 40, 200 - 40 * timer)
-     }
-     if(selectEasyArrows == 2){
-      fill(0, 0, 139, 200)
-      //arrow up
-      rect(480, 150, 40, 200 - 40 * timer)
-     }
-     if(selectEasyArrows == 3){
-     fill(0, 0, 139, 200)
-     //arrow right
-     rect(670, 150, 40, 200 - 40 * timer)
-     }
+      if(selectEasyArrows == 0){
+        fill(0, 0, 139, 200)
+        rect(80, 150, 40, 200 - 40 * timer)
+      }
+      if(selectEasyArrows == 1){
+        fill(0, 0, 139, 200)
+        //arrow down
+        rect(280, 150, 40, 200 - 40 * timer)
+      }
+      if(selectEasyArrows == 2){
+        fill(0, 0, 139, 200)
+        //arrow up
+        rect(480, 150, 40, 200 - 40 * timer)
+      }
+      if(selectEasyArrows == 3){
+        fill(0, 0, 139, 200)
+        //arrow right
+        rect(670, 150, 40, 200 - 40 * timer)
+      }
 
-     image(arrowDown, 200, 20, 200, 200,)
-     image(arrowLeft, 0, 15, 200, 200,)
-     image(arrowUp, 400, 0, 200, 200,)
-     image(arrowRight, 600, 15, 200, 200,) 
+      image(arrowDown, 200, 20, 200, 200,)
+      image(arrowLeft, 0, 15, 200, 200,)
+      image(arrowUp, 400, 0, 200, 200,)
+      image(arrowRight, 600, 15, 200, 200,) 
 
-
-
+      textSize(30)
+      stroke(255, 0, 0)
+      fill(255)
+      if(missCounter < 0){
+        text("ᴍɪꜱꜱ : 0" , 645, 520)
+      }else{
+        text("ᴍɪꜱꜱ : " + missCounter, 645, 520)
+      }
+      text("ᴏᴋ     : " + ok, 645, 480 )
+      text("ɢᴏᴏᴅ : " + good, 645, 440)
+      text("ɢʀᴇᴀᴛ: " + great, 645, 400)
+      text("ᴘᴇʀꜰᴇᴄᴛ : " + perfect, 609, 360)
+      // Check if the timer is in the range for incrementing
+      if (timer > 4.9 && timer < 5 && !timerIncremented) {
+      missCounter += 1;
+      timerIncremented = true; // Set the flag to prevent further increments in the same range
     }
-  }
+
+      }
+
+      console.log(round(timer))
+    }
+    
+  
 
   
 function LevelscreenCG2(){
@@ -251,23 +277,34 @@ function keyPressed() {
       level1Conan = true
     }
   }
-if (  
-  (selectEasyArrows === 2 && keyCode === UP_ARROW) ||
-  (selectEasyArrows === 1 && keyCode === DOWN_ARROW) ||
-  (selectEasyArrows === 0 && keyCode === LEFT_ARROW) ||
-  (selectEasyArrows === 3 && keyCode === RIGHT_ARROW) 
-) {  nextArrow = 1}
+  if(conanGame1 == true)
+    if (  
+      (selectEasyArrows === 2 && keyCode === UP_ARROW) ||
+      (selectEasyArrows === 1 && keyCode === DOWN_ARROW) ||
+    (selectEasyArrows === 0 && keyCode === LEFT_ARROW) ||
+    (selectEasyArrows === 3 && keyCode === RIGHT_ARROW) 
+    ){  
+      if(timer < 1){
+        perfect += 1
+      }else if(timer <2){
+        great += 1
+      }
+      else if(timer <3){
+        good += 1
+      }else if(timer < 5){
+        ok += 1
+      }
+      nextArrow = 1
+    }
    
-if (  
-  (selectEasyArrows === 2 && keyCode != UP_ARROW) ||
-  (selectEasyArrows === 1 && keyCode != DOWN_ARROW) ||
-  (selectEasyArrows === 0 && keyCode != LEFT_ARROW) ||
-  (selectEasyArrows === 3 && keyCode != RIGHT_ARROW) 
-) {  nextArrow = 2}
- 
-
-
-
+    if (  
+      (selectEasyArrows === 2 && keyCode != UP_ARROW) ||
+      (selectEasyArrows === 1 && keyCode != DOWN_ARROW) ||
+      (selectEasyArrows === 0 && keyCode != LEFT_ARROW) ||
+      (selectEasyArrows === 3 && keyCode != RIGHT_ARROW) 
+    )     {  nextArrow = 2}
+    
+  
 
 }
 
