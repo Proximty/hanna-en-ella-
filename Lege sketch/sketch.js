@@ -21,7 +21,7 @@ function preload(){
   //cocan gray  
   albumCover = loadImage('pixil-frame-conan gray.jpg')
   heartPotion = loadImage('Health potion.png')
-  albumCoverPixelArt = loadImage('pixil-frame-conan gray.jpg')
+  albumCoverPixelArt = loadImage('pixil-frame-0.png')
   // next artist 
 
   //songs
@@ -112,9 +112,10 @@ function levelScreen(){
 }
 function LevelscreenCG1(){
   background(0)
+  image (albumCoverPixelArt,70,-25)  
   fill(255, 70, 70, 200)
   rect(0, 550, 800, 50)
-  
+image (albumCoverPixelArt,0,)  
   
 
   
