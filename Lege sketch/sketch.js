@@ -1,4 +1,4 @@
-let screen1 = false//startScreen
+let screen1 = true//startScreen
 let screen2 = false// level selector
 
 let albumCover; //variable for albumb cover conan gray
@@ -8,10 +8,17 @@ let heartPotionX = 50 //x position for the heart potion
 let heartPotionY = 300
 
 
-let level1Conan = true
+let level1Conan = false
 
-let timer = round(deltaTime/1000);
+let timer;
 
+let conanGame1 = false
+
+//arows
+let arrowUp;
+let arrowDown;
+let arrowLeft;
+let arrowRight;
 
 
 
@@ -22,6 +29,11 @@ function preload(){
   albumCover = loadImage('pixil-frame-conan gray.jpg')
   heartPotion = loadImage('Health potion.png')
   albumCoverPixelArt = loadImage('pixil-frame-0.png')
+
+  arrowUp = loadImage("arrow up.png")
+  arrowDown = loadImage("arrow down.png")
+  arrowLeft = loadImage("arrow left.png")
+  arrowRight = loadImage("arrow right.png")
   // next artist 
 
   //songs
@@ -40,6 +52,7 @@ function setup() {
 
 function draw() {
   
+  timer= round(deltaTime/1000);
   
   if(screen1 == true){
     background(0)
@@ -115,7 +128,24 @@ function LevelscreenCG1(){
   image (albumCoverPixelArt,70,-25)  
   fill(255, 70, 70, 200)
   rect(0, 550, 800, 50)
-image (albumCoverPixelArt,0,)  
+  image (albumCoverPixelArt,0,)  
+  //draw button
+
+  if(conanGame1 == false){
+    textSize(40)
+    fill(255, 0, 0)
+    text("ꜱᴛᴀʀᴛ", 650, 500)
+    strokeWeight(0.7)
+    fill(255, 0, 0, 50)
+    stroke("white")
+    rect(625, 450, 150, 80)
+  }
+  if(conanGame1 == true){
+     image(arrowDown, 200, 20, 200, 200, )
+     image(arrowLeft, 0, 15, 200, 200 )
+     image(arrowUp, 400, 0, 200, 200)
+     image(arrowRight, 600, 15, 200, 200)
+  }
   
 
   
@@ -141,6 +171,12 @@ function mousePressed(){
       screen1 = false
       screen2 = true
     }
+  }
+  if(level1Conan == true){
+    if(x >= 625 && x <= 775 && y >= 450 && y <= 530){
+      conanGame1 = true
+    }
+
   }
 
   //x >= 625 && x <= 775
