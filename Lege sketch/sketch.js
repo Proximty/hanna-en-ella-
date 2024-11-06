@@ -10,6 +10,9 @@ let heartPotionY = 300
 
 let level1Conan = true
 
+let timer = round(deltaTime/1000);
+
+
 
 
 function preload(){
@@ -18,6 +21,7 @@ function preload(){
   //cocan gray  
   albumCover = loadImage('pixil-frame-conan gray.jpg')
   heartPotion = loadImage('Health potion.png')
+  albumCoverPixelArt = loadImage('images /pixil-frame-conan gray.jpg')
   // next artist 
 
   //songs
@@ -31,6 +35,7 @@ function preload(){
 
 function setup() {
   createCanvas(800, 600);
+  
 }
 
 function draw() {
