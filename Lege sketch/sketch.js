@@ -10,7 +10,7 @@ let heartPotionY = 300
 
 let level1Conan = false
 
-let timer;
+let timer = 0
 
 let conanGame1 = false
 
@@ -19,6 +19,8 @@ let arrowUp;
 let arrowDown;
 let arrowLeft;
 let arrowRight;
+
+let selectEasyArrows;
 
 
 
@@ -52,7 +54,7 @@ function setup() {
 
 function draw() {
   
-  timer= round(deltaTime/1000);
+  timer += (deltaTime/1000);
   
   if(screen1 == true){
     background(0)
@@ -68,6 +70,7 @@ function draw() {
   else{
     background(220);
   }
+
 
   
   
@@ -134,23 +137,55 @@ function LevelscreenCG1(){
   if(conanGame1 == false){
     textSize(40)
     fill(255, 0, 0)
-    text("ꜱᴛᴀʀᴛ", 650, 500)
+    text("ᴇᴀꜱʏ", 660, 500)
     strokeWeight(0.7)
     fill(255, 0, 0, 50)
     stroke("white")
     rect(625, 450, 150, 80)
   }
   if(conanGame1 == true){
-     image(arrowDown, 200, 20, 200, 200, )
+
+
+     if(timer>= 5){
+      timer = 0
+      // console.log(timer)
+      selectEasyArrows = round(random(3))
+      console.log(selectEasyArrows)
+     }
+
+     //arrow left
+     if(selectEasyArrows == 0){
+      fill(0, 0, 139, 200)
+      rect(80, 150, 40, 200 - 40 * timer)
+     }
+     if(selectEasyArrows == 1){
+      fill(0, 0, 139, 200)
+      //arrow down
+      rect(280, 150, 40, 200 - 40 * timer)
+     }
+     if(selectEasyArrows == 2){
+      fill(0, 0, 139, 200)
+      //arrow up
+      rect(480, 150, 40, 200 - 40 * timer)
+     }
+     if(selectEasyArrows == 3){
+     fill(0, 0, 139, 200)
+     //arrow right
+     rect(670, 150, 40, 200 - 40 * timer)
+     }
+
+     image(arrowDown, 200, 20, 200, 200 )
      image(arrowLeft, 0, 15, 200, 200 )
      image(arrowUp, 400, 0, 200, 200)
-     image(arrowRight, 600, 15, 200, 200)
+     image(arrowRight, 600, 15, 200, 200) 
+
+
+
+
+    }
   }
-  
 
   
-
-}
 function LevelscreenCG2(){
   
 }
