@@ -50,7 +50,7 @@ function preload(){
   // next artist 
   //songs
   // conan gray 
-
+  moviesConanGray = loadSound("Conan_Gray_-_Movies.mp3")
   // next arist
 }
 
@@ -65,7 +65,7 @@ function setup() {
 }
 
 function draw() {
-  
+  moviesConanGray.play()
   timer += (deltaTime/1000);
   
   if(screen1 == true){
@@ -216,7 +216,7 @@ function LevelscreenCG1(){
 
       }
 
-      console.log(round(timer))
+      // console.log(round(timer))
     }
     
   
