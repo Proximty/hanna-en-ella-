@@ -32,6 +32,9 @@ let selectEasyArrows;
 
 let timerIncremented = false; // zorgt ervoor dat als er geen pijlen worden gedrukt binnen de 5 seconden dat misses maar 1 meer word inplaats van hoeveel je framerate is
 
+let moviesConanGray;
+
+
 function preload(){
   //images 
   //indie pop 
@@ -45,9 +48,9 @@ function preload(){
   arrowLeft = loadImage("arrow left.png")
   arrowRight = loadImage("arrow right.png")
   // next artist 
-
   //songs
   // conan gray 
+
   // next arist
 }
 
@@ -153,6 +156,7 @@ function LevelscreenCG1(){
     rect(625, 450, 150, 80)
   }
   if(conanGame1 == true){
+
     stroke(255)
      if(timer>= 5 || nextArrow >= 1 ){
       if(nextArrow === 2){
