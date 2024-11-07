@@ -180,7 +180,7 @@ function LevelscreenCG1(){
     if(conanGame1ScoreBoard == true){
       text("score board for easy game 1 goed here", 50, 50)
     }
-    if(timerForGameC1>= 214){
+    if(timerForGameC1>= 77){
       conanGame1 = false
       conanGame1ScoreBoard = true
 
@@ -244,16 +244,17 @@ function LevelscreenCG1(){
       timerIncremented = true; // Set the flag to prevent further increments in the same range
     }
       // text(214 - round(timerForGameC1) + " ", 20, 20)
-      text(floor((214-round(timerForGameC1))/60),20, 20)
+      text(floor((78-round(timerForGameC1))/60),20, 20)
       text(": ", 40, 20)
-      if(timerForGameC1 <34){
-        text((214-round(timerForGameC1)) - 180, 50, 20)
-      }else if(timerForGameC1 <93){
-        text((214-round(timerForGameC1)) - 120, 50, 20)
-      }else if(timerForGameC1 <153  ){
-        text((214-round(timerForGameC1)) - 60, 50, 20)
+      // if(timerForGameC1 <34){
+      //   text((214-round(timerForGameC1)) - 180, 50, 20)
+      // }else if(timerForGameC1 <93){
+      //   text((214-round(timerForGameC1)) - 120, 50, 20)
+      //}
+      if(timerForGameC1 <18.5  ){
+        text((78-round(timerForGameC1)) - 60, 50, 20)
       }else{
-        text((214-round(timerForGameC1)), 50, 20)
+        text((78-round(timerForGameC1)), 50, 20)
 
       }
       
