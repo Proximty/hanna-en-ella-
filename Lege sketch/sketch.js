@@ -1,4 +1,4 @@
-let screen1 = true//startScreen
+let screen1 = false//startScreen
 let screen2 = false// level selector
 
 let albumCover; //variable for albumb cover conan gray
@@ -7,8 +7,10 @@ let heartPotion; //heart potion for conan gray game
 let heartPotionX = 50 //x position for the heart potion
 let heartPotionY = 300
 
+let timerForGameC1 = 0
+    
 
-let level1Conan = false
+let level1Conan = true
 
 let timer = 0
 let nextArrow = 0
@@ -20,7 +22,8 @@ let good = 0
 let ok = 0
 let missCounter = -1  // begint op -1 zodat als je op het scherm komt van het eerste conan gray spel dat je niet al met 1 miss begint
 
-let conanGame1 = false
+let conanGame1 = true
+let conanGame1ScoreBoard = false
 
 //arows
 let arrowUp;
@@ -33,6 +36,8 @@ let selectEasyArrows;
 let timerIncremented = false; // zorgt ervoor dat als er geen pijlen worden gedrukt binnen de 5 seconden dat misses maar 1 meer word inplaats van hoeveel je framerate is
 
 let moviesConanGray;
+
+
 
 
 function preload(){
@@ -60,12 +65,14 @@ function preload(){
 
 function setup() {
   createCanvas(800, 600);
-  
+  //moviesConanGray.play()
   
 }
 
 function draw() {
-  moviesConanGray.play()
+  
+  
+  timerForGameC1 += deltaTime/ 1000
   timer += (deltaTime/1000);
   
   if(screen1 == true){
@@ -146,7 +153,7 @@ function LevelscreenCG1(){
   image (albumCoverPixelArt,0,)  
 
   //draw button
-  if(conanGame1 == false){
+  if(conanGame1 == false && conanGame1ScoreBoard == false){
     textSize(40)
     fill(255, 0, 0)
     text("ᴇᴀꜱʏ", 660, 500)
@@ -155,13 +162,36 @@ function LevelscreenCG1(){
     stroke("white")
     rect(625, 450, 150, 80)
   }
-  if(conanGame1 == true){
 
+
+  if(conanGame1 == true){
+    if(moviesConanGray.isPlaying()){
+
+    }else{
+      moviesConanGray.play()
+    }
+  }else{
+    moviesConanGray.pause()
+  }
+
+
+  if(conanGame1 == true){
+    
+    if(conanGame1ScoreBoard == true){
+      text("score board for easy game 1 goed here", 50, 50)
+    }
+    if(timerForGameC1>= 214){
+      conanGame1 = false
+      conanGame1ScoreBoard = true
+
+    }
+    console.log(timerForGameC1)
     stroke(255)
-     if(timer>= 5 || nextArrow >= 1 ){
+    if(timer>= 5 || nextArrow >= 1 ){
       if(nextArrow === 2){
         missCounter ++
       }
+
       
       timer = 0
       nextArrow = 0
@@ -169,7 +199,7 @@ function LevelscreenCG1(){
       timerIncremented = false; // Reset the flag when starting a new cycle
       selectEasyArrows = round(random(3))
      }
-
+     
      //arrow left
       if(selectEasyArrows == 0){
         fill(0, 0, 139, 200)
@@ -213,10 +243,26 @@ function LevelscreenCG1(){
       missCounter += 1;
       timerIncremented = true; // Set the flag to prevent further increments in the same range
     }
+      // text(214 - round(timerForGameC1) + " ", 20, 20)
+      text(floor((214-round(timerForGameC1))/60),20, 20)
+      text(": ", 40, 20)
+      if(timerForGameC1 <34){
+        text((214-round(timerForGameC1)) - 180, 50, 20)
+      }else if(timerForGameC1 <93){
+        text((214-round(timerForGameC1)) - 120, 50, 20)
+      }else if(timerForGameC1 <153  ){
+        text((214-round(timerForGameC1)) - 60, 50, 20)
+      }else{
+        text((214-round(timerForGameC1)), 50, 20)
 
       }
+      
+      }
+      //180 3 min
+      //120 2 min
+      //60 1 min
 
-      // console.log(round(timer))
+      
     }
     
   
@@ -245,7 +291,9 @@ function mousePressed(){
   }
   if(level1Conan == true){
     if(x >= 625 && x <= 775 && y >= 450 && y <= 530){
+      timerForGameC1 = 0
       conanGame1 = true
+
     }
 
   }
