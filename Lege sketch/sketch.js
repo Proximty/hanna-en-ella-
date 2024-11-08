@@ -308,10 +308,13 @@ function LevelscreenCG1(){
       if(timerForGameC1 <18.5  ){
         text((78-round(timerForGameC1)) - 60, 50, 20)
       }else{
+        if((78 - round(timerForGameC1)) < 10 ){
+          text("0" + (78-round(timerForGameC1)), 50, 20)
+        }else{
         text((78-round(timerForGameC1)), 50, 20)
+        }
 
       }
-      
       }
 
       
