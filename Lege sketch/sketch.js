@@ -1,4 +1,4 @@
-let screen1 = false//startScreen
+let screen1 = true//startScreen
 let screen2 = false// level selector
 
 let albumCover; //variable for albumb cover conan gray
@@ -10,7 +10,7 @@ let heartPotionY = 300
 let timerForGameC1 = 0
     
 
-let level1Conan = true
+let level1Conan = false
 
 let timer = 0
 let nextArrow = 0
@@ -22,7 +22,7 @@ let good = 0
 let ok = 0
 let missCounter = -1  // begint op -1 zodat als je op het scherm komt van het eerste conan gray spel dat je niet al met 1 miss begint
 
-let conanGame1 = true
+let conanGame1 = false
 let conanGame1ScoreBoard = false
 
 //arows
@@ -90,9 +90,6 @@ function draw() {
     background(220);
   }
 
-
-  
-  
 }
 
 function startScreen(){
@@ -151,9 +148,33 @@ function LevelscreenCG1(){
   fill(255, 70, 70, 200)
   rect(0, 550, 800, 50)
   image (albumCoverPixelArt,0,)  
+  
 
-  //draw button
+
+
   if(conanGame1 == false && conanGame1ScoreBoard == false){
+    image(arrowLeft, 0, 0, 100, 100)
+    
+    if(mouseX >= 745 && mouseX <= 795 && mouseY <= 50){
+    fill(255, 165, 0, 170)
+    rect(580,0, 250 )
+    fill(255)
+    text("how to play:", 600, 50)
+    text("When playing press", 600, 90)
+    text("the arrow keys at the", 600, 110)
+    text("last possible moment.", 600, 130)
+
+    text("But be shure not to", 600, 170)
+    text("miss them!", 600, 190)
+    }
+
+    //info button
+    fill("orange")
+    circle(770, 25, 30)
+    fill(255)
+    text("i", 768, 30)
+
+
     textSize(40)
     fill(255, 0, 0)
     text("ᴇᴀꜱʏ", 660, 500)
@@ -161,6 +182,33 @@ function LevelscreenCG1(){
     fill(255, 0, 0, 50)
     stroke("white")
     rect(625, 450, 150, 80)
+
+
+    textSize(40)
+    fill("orange")
+    text("ɴᴏʀᴍᴀʟ", 325, 500)
+    strokeWeight(0.7)
+    fill(255, 0, 0, 50)
+    stroke("white")
+    fill(255, 165, 0, 100)
+    rect(315, 450, 150, 80)
+
+    textSize(40)
+    fill("green")
+    text("ʜᴀʀᴅ",50, 500)
+    strokeWeight(0.7)
+    fill(255, 0, 0, 50)
+    stroke("white")
+    fill(0, 128, 0, 50)
+    rect(20, 450, 150, 80)
+
+    for(let i = 0; i < 2; i++){
+      textSize(20)
+      fill(255)
+      text("coming soon", 40 + 295 * i , 440 )
+    }
+    
+
   }
 
 
@@ -174,18 +222,30 @@ function LevelscreenCG1(){
     moviesConanGray.pause()
   }
 
+  if(conanGame1ScoreBoard == true){
+    image(arrowLeft, 0, 0, 100, 100)
+    fill(255)
+    if(missCounter >= 10){
+      text("ʏᴏᴜ ᴅɪᴅ ᴛʀᴀɢɪᴄʟʏ...", 250, 50)
+    }else(
+      text("ᴜ ᴅɪᴅ ᴡᴇʟʟ!",300, 50)
+    )
+    text("ᴍɪꜱꜱ : " + missCounter, 300, 260)//520
+    text("ᴏᴋ     : " + ok, 300, 220 )
+    text("ɢᴏᴏᴅ : " + good, 300, 180)
+    text("ɢʀᴇᴀᴛ: " + great, 300, 140)
+    text("ᴘᴇʀꜰᴇᴄᴛ : " + perfect, 290, 100)
+  }
 
   if(conanGame1 == true){
     
-    if(conanGame1ScoreBoard == true){
-      text("score board for easy game 1 goed here", 50, 50)
-    }
     if(timerForGameC1>= 77){
-      conanGame1 = false
+      
       conanGame1ScoreBoard = true
+      conanGame1 = false
 
     }
-    console.log(timerForGameC1)
+    //console.log(timerForGameC1)
     stroke(255)
     if(timer>= 5 || nextArrow >= 1 ){
       if(nextArrow === 2){
@@ -234,7 +294,7 @@ function LevelscreenCG1(){
       }else{
         text("ᴍɪꜱꜱ : " + missCounter, 645, 520)
       }
-      text("ᴏᴋ     : " + ok, 645, 480 )
+      text("ᴏᴋ     : " + ok, 645, 480)
       text("ɢᴏᴏᴅ : " + good, 645, 440)
       text("ɢʀᴇᴀᴛ: " + great, 645, 400)
       text("ᴘᴇʀꜰᴇᴄᴛ : " + perfect, 609, 360)
@@ -243,14 +303,8 @@ function LevelscreenCG1(){
       missCounter += 1;
       timerIncremented = true; // Set the flag to prevent further increments in the same range
     }
-      // text(214 - round(timerForGameC1) + " ", 20, 20)
       text(floor((78-round(timerForGameC1))/60),20, 20)
-      text(": ", 40, 20)
-      // if(timerForGameC1 <34){
-      //   text((214-round(timerForGameC1)) - 180, 50, 20)
-      // }else if(timerForGameC1 <93){
-      //   text((214-round(timerForGameC1)) - 120, 50, 20)
-      //}
+
       if(timerForGameC1 <18.5  ){
         text((78-round(timerForGameC1)) - 60, 50, 20)
       }else{
@@ -259,14 +313,9 @@ function LevelscreenCG1(){
       }
       
       }
-      //180 3 min
-      //120 2 min
-      //60 1 min
 
       
     }
-    
-  
 
   
 function LevelscreenCG2(){
@@ -298,16 +347,27 @@ function mousePressed(){
     }
 
   }
-
-  //x >= 625 && x <= 775
-  //y >= 450 && y<= 530
-
-
+  
+    if(x >= 25 && x <= 85 && y >= 20 && y <= 80){
+      if(conanGame1ScoreBoard == true){
+        missCounter = -1
+        ok = 0
+        good = 0
+        great = 0
+        perfect = 0
+        conanGame1ScoreBoard = false
+      }
+      if(conanGame1ScoreBoard == false && conanGame1 == false && level1Conan == true){
+        console.log("yo")
+        screen2 = true
+        
+      }
+      
+    }
+  
 
 }
-//ideas
-//I want to make it so that u have to play different obby's in 2d to collect new songs and that when you get the last song you get to attend a concert
-//freakyfriday
+
 
 function keyPressed() {
   if(screen2 == true){
@@ -338,14 +398,14 @@ function keyPressed() {
     (selectEasyArrows === 3 && keyCode === RIGHT_ARROW) 
     ){  
       if(timer < 1){
-        perfect += 1
+        ok ++
       }else if(timer <2){
-        great += 1
+        good ++
       }
       else if(timer <3){
-        good += 1
+        great ++
       }else if(timer < 5){
-        ok += 1
+        perfect ++
       }
       nextArrow = 1
     }
