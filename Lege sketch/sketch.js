@@ -7,12 +7,15 @@ let heartPotion; //heart potion for conan gray game
 let heartPotionX = 50 //x position for the heart potion
 let heartPotionY = 300
 
-let timerForGameC1 = 0
+let timerForGameC1 = 0;
+
+let timerForGameC2 = 0;
     
 
 let level1Conan = false
 
 let timer = 0
+
 let nextArrow = 0
 
 
@@ -22,8 +25,11 @@ let good = 0
 let ok = 0
 let missCounter = -1  // begint op -1 zodat als je op het scherm komt van het eerste conan gray spel dat je niet al met 1 miss begint
 
-let conanGame1 = false
+let conanGame1 = false //easy mode of the first conab gray game
 let conanGame1ScoreBoard = false
+
+let conanGame2 = false; //normal mode of the first conan gray game
+
 
 //arows
 let arrowUp;
@@ -33,9 +39,14 @@ let arrowRight;
 
 let selectEasyArrows;
 
+let selectNormalArrows;
+
 let timerIncremented = false; // zorgt ervoor dat als er geen pijlen worden gedrukt binnen de 5 seconden dat misses maar 1 meer word inplaats van hoeveel je framerate is
 
 let moviesConanGray;
+
+
+let randomSpeed; //random speed chose for game 2 
 
 
 
@@ -73,7 +84,9 @@ function draw() {
   
   
   timerForGameC1 += deltaTime/ 1000
+  timerForGameC2 += deltaTime/ 1000
   timer += (deltaTime/1000);
+  //timerNormalRithmGame += (deltaTime/1000);
   
   if(screen1 == true){
     background(0)
@@ -152,7 +165,7 @@ function LevelscreenCG1(){
 
 
 
-  if(conanGame1 == false && conanGame1ScoreBoard == false){
+  if(conanGame1 == false && conanGame1ScoreBoard == false && conanGame2 == false){
     image(arrowLeft, 0, 0, 100, 100)
     
     if(mouseX >= 745 && mouseX <= 795 && mouseY <= 50){
@@ -202,17 +215,91 @@ function LevelscreenCG1(){
     fill(0, 128, 0, 50)
     rect(20, 450, 150, 80)
 
-    for(let i = 0; i < 2; i++){
+      //progession texts
       textSize(20)
       fill(255)
-      text("coming soon", 40 + 295 * i , 440 )
-    }
+      text("coming soon", 40, 440 )
+      text("in progress", 340, 440)
+
     
 
   }
 
+  //noraml mode
+  if(conanGame2 == true){
+    
+    let lengthOfNomralStroke; //here i set a value to how much I have to mamke stroke smaller depending on how much time the playere has to click
+    
+    
+    if(timerForGameC2 >= 77){
+      conanGame2 = false
 
-  if(conanGame1 == true){
+    }
+    if(timer >= 5 || timer >= randomSpeed){
+      timer = 0
+      
+      selectNormalArrows = round(random(3));
+      randomSpeed = round(random(1,5)) 
+    }
+
+    console.log("speed "+ randomSpeed)
+    stroke(255)
+
+
+    if(randomSpeed == 1){
+      lengthOfNomralStroke = 200;
+
+    }else if(randomSpeed == 2){
+      lengthOfNomralStroke = 100
+
+    }else if(randomSpeed == 3){
+      lengthOfNomralStroke = 200/3
+    }else if(randomSpeed == 4){
+      lengthOfNomralStroke = 50
+    }
+    else{
+      lengthOfNomralStroke = 40
+    }
+
+
+    if(selectNormalArrows == 0){
+      fill(0, 0, 139, 200)
+      rect(80, 150, 40, 200 - lengthOfNomralStroke * timer)
+    }
+    if(selectNormalArrows == 1){
+      fill(0, 0, 139, 200)
+      //arrow down
+      rect(280, 150, 40, 200 - lengthOfNomralStroke * timer)
+    }
+    if(selectNormalArrows == 2){
+      fill(0, 0, 139, 200)
+      //arrow up
+      rect(480, 150, 40, 200 - lengthOfNomralStroke * timer)
+    }
+    if(selectNormalArrows == 3){
+      fill(0, 0, 139, 200)
+      //arrow right
+      rect(670, 150, 40, 200 - lengthOfNomralStroke * timer)
+    }
+    
+
+    image(arrowDown, 200, 20, 200, 200,)
+    image(arrowLeft, 0, 15, 200, 200,)
+    image(arrowUp, 400, 0, 200, 200,)
+    image(arrowRight, 600, 15, 200, 200,) 
+     
+    
+    
+
+
+
+  }//end normal mode
+
+
+
+
+  //music for conan game
+  if(conanGame1 == true || conanGame2 == true){
     if(moviesConanGray.isPlaying()){
 
     }else{
@@ -222,6 +309,7 @@ function LevelscreenCG1(){
     moviesConanGray.pause()
   }
 
+  //easy mode
   if(conanGame1ScoreBoard == true){
     image(arrowLeft, 0, 0, 100, 100)
     fill(255)
@@ -343,10 +431,16 @@ function mousePressed(){
     }
   }
   if(level1Conan == true){
-    if(x >= 625 && x <= 775 && y >= 450 && y <= 530){
-      timerForGameC1 = 0
-      conanGame1 = true
+    if(y >= 450 && y <= 530){
+      if(x >= 625 && x <= 775 ){
+        timerForGameC1 = 0
+        conanGame1 = true
 
+      }
+      if(x>= 315 && x <= 465){
+        timerForGameC2 = 0
+        conanGame2 = true;
+      }
     }
 
   }
