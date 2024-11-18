@@ -45,7 +45,6 @@ let timerIncremented = false; // zorgt ervoor dat als er geen pijlen worden gedr
 
 let moviesConanGray;
 
-
 let randomSpeed; //random speed chose for game 2 
 
 
@@ -91,17 +90,15 @@ function draw() {
   if(screen1 == true){
     background(0)
     startScreen()
-  }else if(screen2 == true){
+  }if(screen2 == true){
     background(0)
     levelScreen()
     
   }
-  else if(level1Conan == true){
+  if(level1Conan == true){
     LevelscreenCG1()
   }
-  else{
-    background(220);
-  }
+
 
 }
 
@@ -219,7 +216,7 @@ function LevelscreenCG1(){
       textSize(20)
       fill(255)
       text("coming soon", 40, 440 )
-      text("in progress", 340, 440)
+
 
     
 
@@ -233,16 +230,22 @@ function LevelscreenCG1(){
     
     if(timerForGameC2 >= 77){
       conanGame2 = false
+      conanGame1ScoreBoard = true
 
     }
-    if(timer >= 5 ||nextArrow>=1){
+    if(timer >= 5 ||nextArrow>=1 || timer >= randomSpeed){
+
+      if(nextArrow === 2 ||nextArrow == 0){
+        missCounter ++
+      }
       timer = 0
       nextArrow=0
       selectNormalArrows = round(random(3));
-      randomSpeed = round(random(1,5)) 
+      randomSpeed = round(random(1,4)) 
     }
 
-    console.log("speed "+ randomSpeed)
+    console.log(missCounter)
+    //console.log("speed "+ randomSpeed)
     stroke(255)
 
 
@@ -288,6 +291,19 @@ function LevelscreenCG1(){
     image(arrowLeft, 0, 15, 200, 200,)
     image(arrowUp, 400, 0, 200, 200,)
     image(arrowRight, 600, 15, 200, 200,) 
+
+    textSize(30)
+    stroke(255, 0, 0)
+    fill(255)
+    if(missCounter < 0){
+      text("ᴍɪꜱꜱ : 0" , 645, 520)
+    }else{
+      text("ᴍɪꜱꜱ : " + missCounter, 645, 520)
+    }
+    text("ᴏᴋ     : " + ok, 645, 480)
+    text("ɢᴏᴏᴅ : " + good, 645, 440)
+    text("ɢʀᴇᴀᴛ: " + great, 645, 400)
+    text("ᴘᴇʀꜰᴇᴄᴛ : " + perfect, 609, 360)
      
     
     
@@ -314,11 +330,16 @@ function LevelscreenCG1(){
   if(conanGame1ScoreBoard == true){
     image(arrowLeft, 0, 0, 100, 100)
     fill(255)
+    textSize(30)
+    stroke(255, 0, 0)
+    fill(255)
     if(missCounter >= 10){
       text("ʏᴏᴜ ᴅɪᴅ ᴛʀᴀɢɪᴄʟʏ...", 250, 50)
     }else(
       text("ᴜ ᴅɪᴅ ᴡᴇʟʟ!",300, 50)
     )
+
+    
     text("ᴍɪꜱꜱ : " + missCounter, 300, 260)//520
     text("ᴏᴋ     : " + ok, 300, 220 )
     text("ɢᴏᴏᴅ : " + good, 300, 180)
@@ -524,8 +545,81 @@ function keyPressed() {
     (selectNormalArrows === 0 && keyCode === LEFT_ARROW) ||
     (selectNormalArrows === 3 && keyCode === RIGHT_ARROW) 
     ){ 
-    nextArrow = 1
-}}
+
+      if(randomSpeed == 4){
+        if(timer < 0.8){
+          ok ++
+        }else if(timer <1.6){
+          good ++
+        }
+        else if(timer <2.4){
+          great ++
+        }else if(timer < 4){
+          perfect ++
+        }
+      }
+
+      else if(randomSpeed == 3){
+        if(timer < 0.6){
+          ok ++
+        }else if(timer <1.6 ){
+          good ++
+        }
+        else if(timer <2.4){
+          great ++
+        }else if(timer < 3){
+          perfect ++
+        }
+      }
+
+      else if(randomSpeed == 2){
+        if(timer < 0.4){
+          ok ++
+        }else if(timer <0.8 ){
+          good ++
+        }
+        else if(timer <1.2){
+          great ++
+        }else if(timer < 2){
+          perfect ++
+        }
+      }
+      else if(randomSpeed == 1){
+        if(timer < 0.2){
+          ok ++
+        }else if(timer <0.4 ){
+          good ++
+        }
+        else if(timer <0.6){
+          great ++
+        }else if(timer < 1){
+          perfect ++
+        }
+      }else{
+        if(timer < 1){
+          ok ++
+        }else if(timer <2){
+          good ++
+        }
+        else if(timer <3){
+          great ++
+        }else if(timer < 5){
+          perfect ++
+        }
+      }
+
+      nextArrow = 1
+    }
+    if (  
+      (selectNormalArrows === 2 && keyCode != UP_ARROW) ||
+      (selectNormalArrows === 1 && keyCode != DOWN_ARROW) ||
+      (selectNormalArrows === 0 && keyCode != LEFT_ARROW) ||
+      (selectNormalArrows === 3 && keyCode != RIGHT_ARROW) 
+    )     {  nextArrow = 2}
+    
+
+
+}
   
 
 }
