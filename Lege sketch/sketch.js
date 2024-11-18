@@ -235,9 +235,9 @@ function LevelscreenCG1(){
       conanGame2 = false
 
     }
-    if(timer >= 5 || timer >= randomSpeed){
+    if(timer >= 5 ||nextArrow>=1){
       timer = 0
-      
+      nextArrow=0
       selectNormalArrows = round(random(3));
       randomSpeed = round(random(1,5)) 
     }
@@ -260,6 +260,7 @@ function LevelscreenCG1(){
     else{
       lengthOfNomralStroke = 40
     }
+  
 
 
     if(selectNormalArrows == 0){
@@ -514,6 +515,17 @@ function keyPressed() {
       (selectEasyArrows === 3 && keyCode != RIGHT_ARROW) 
     )     {  nextArrow = 2}
     
+    //normal mode 
+
+    if(conanGame2 == true){
+    if (  
+      (selectNormalArrows === 2 && keyCode === UP_ARROW) ||
+      (selectNormalArrows === 1 && keyCode === DOWN_ARROW) ||
+    (selectNormalArrows === 0 && keyCode === LEFT_ARROW) ||
+    (selectNormalArrows === 3 && keyCode === RIGHT_ARROW) 
+    ){ 
+    nextArrow = 1
+}}
   
 
 }
